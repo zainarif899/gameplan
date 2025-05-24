@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('file')->nullable();
+        Schema::create('files', function (Blueprint $table) {
+            $table->id();
+            $table->string('orig_filename', 100);
+            $table->string('mime_type', 50);
+            $table->bigInteger('filesize');
+            $table->text('content');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('files');
     }
 };

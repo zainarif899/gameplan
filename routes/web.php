@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Crudcontroller;
+use App\Http\Controllers\UserrepController;
+use App\Http\Controllers\FileController;
+use App\Repositories\Eloquent\Userrepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +18,29 @@ use App\Http\Controllers\Crudcontroller;
 */
 
 Route::get('/', function () {
-     $parser = new \Smalot\PdfParser\Parser();
-        $path = public_path('app/public/uploads/1747746010.pdf');
-        $pdf = $parser->parseFile($path);
-        $text = $pdf->getText();
-        $metadata = $pdf->getDetails();
-        $pageCount = $pdf->getPages();
-        dd($pageCount);
+    // $parser = new \Smalot\PdfParser\Parser();
+    // $path = storage_path('app/Doc/check.pdf');
+    // $pdf = $parser->parseFile($path);
+    // $text = $pdf->getText();
+    // $metadata = $pdf->getDetails();
+    // $pageCount = $pdf->getPages();
+    //     dd($pageCount);
         
     return view('welcome');
 });
 
-Route::get('/user_page', [Crudcontroller::class, 'user_page'])->name('user_page');
-Route::get('user/create',[Crudcontroller::class,'create'])->name('create');
+
+
+Route::get('/user_index',[UserrepController::class,'index'])->name('user_index');
+Route::get('user/create',[UserrepController::class,'create'])->name('create');
+Route::get('/user_login',[UserrepController::class,'login'])->name('userlogin');
+Route::get('logout',[UserrepController::class,'logout'])->name('logout');
+Route::get('home',[UserrepController::class,'homepage'])->name('home');
+
+Route::post('user/logins',[UserrepController::class,'logins'])->name('logins');
+Route::post('user/store',[UserrepController::class,'store'])->name('store');
+
+
+
+
 
