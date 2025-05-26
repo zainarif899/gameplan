@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\Crudcontroller;
 use App\Http\Controllers\UserrepController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,11 +28,17 @@ use Illuminate\Support\Facades\Route;
 // ]);
 
 
-Route::get('/users', [UserrepController::class, 'index'])->name('users.index');
+// routes/api.php
+
+
+
+
+Route::get('/users', [UserrepController::class, 'index']);
 Route::post('/users', [UserrepController::class, 'store']);
 Route::post('logins',[UserrepController::class,'logins']);
 Route::post('logout',[UserrepController::class,'logout']);
 Route::get('/users/{id}', [UserrepController::class, 'show']);
 Route::put('/users/{id}', [UserrepController::class, 'update']);
 Route::delete('/users/{id}', [UserrepController::class, 'destroy']);
+
 // Route::post('/fileupload', [Crudcontroller::class, 'fileupload']);
