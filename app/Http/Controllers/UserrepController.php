@@ -16,11 +16,11 @@ use Illuminate\Http\Request;
  */
 class UserrepController extends Controller
 {
-    protected $userRepo;
+    protected $userRepository;
 
-    public function __construct(Userinterface $userRepo)
+    public function __construct(Userinterface $userRepository)
     {
-        $this->userRepo = $userRepo;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -36,7 +36,7 @@ class UserrepController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepo->all();
+        $users = $this->userRepository->all();
         return response()->json($users);
     }
 
@@ -70,7 +70,7 @@ class UserrepController extends Controller
         try {
             $data = $request->only(['name', 'email', 'password']);
             $data['password'] = bcrypt($data['password']);
-            $user = $this->userRepo->create($data);
+            $user = $this->userRepository->create($data);
             $success['token'] = $user->createToken('myapp')->plainTextToken;
 
             return response()->json($user, 201);
@@ -128,7 +128,7 @@ class UserrepController extends Controller
 
     public function show($id)
     {
-        $user = $this->userRepo->find($id);
+        $user = $this->userRepository->find($id);
         return response()->json($user);
     }
 
@@ -137,7 +137,7 @@ class UserrepController extends Controller
         try {
             $data = $request->only(['name', 'email', 'password']);
             $data['password'] = bcrypt($data['password']);
-            $user = $this->userRepo->update($id, $data);
+            $user = $this->userRepository->update($id, $data);
             $success['token'] = $user->createToken('myapp')->plainTextToken;
             return response()->json($user);
         } catch (Exception $e) {
@@ -147,7 +147,7 @@ class UserrepController extends Controller
 
     public function destroy($id)
     {
-        $this->userRepo->delete($id);
+        $this->userRepository->delete($id);
         return response()->json(['message' => 'User deleted']);
     }
 

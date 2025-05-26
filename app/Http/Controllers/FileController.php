@@ -12,11 +12,11 @@ use PhpParser\Node\Expr\FuncCall;
 
 class FileController extends Controller
 {
-    protected $userRepo;
+    protected $userRepository;
 
-    public function __construct(Filesinterface $userRepo)
+    public function __construct(Filesinterface $userRepository)
     {
-        $this->userRepo = $userRepo;
+        $this->userRepository = $userRepository;
     }
 
     public function store(Filerequest $request){
